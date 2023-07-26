@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,6 +74,17 @@ public class Main {
                     System.out.println(category);
                 }
 
+                for(String state: states) {
+                    try(PrintWriter writer = new PrintWriter(new File(state+".txt"))){
+                        for(SolarData row: solarData) {
+                            if(state.equals(row.state)) {
+                                writer.println(row);
+                            }
+                        }
+                    } catch (FileNotFoundException exception) {
+                        System.out.println(exception.getMessage());
+                    }
+                }
             } catch (FileNotFoundException exception) {
                 System.out.println(exception.getMessage());
             }
